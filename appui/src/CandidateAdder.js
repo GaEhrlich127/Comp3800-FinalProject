@@ -4,7 +4,7 @@ import './CandidateAdder.css'
 export class CandidateAdder extends Component{
     constructor(props) {
         super(props)
-        this.state = {newCandidate:null}
+        this.state = {newCandidate:""}
     }
 	
 	
@@ -15,6 +15,7 @@ export class CandidateAdder extends Component{
                     <input
                         placeholder="Write in Candidate Here"
                         onChange={(event)=>{this.setState({newCandidate:event.target.value})}}
+                        value={this.state.newCandidate}
                     />
                 </td>
                 <td>
@@ -22,8 +23,9 @@ export class CandidateAdder extends Component{
                         type="button"
                         value="Add Candidate"
                         onClick={()=>{
-                            if(!((typeof this.state.newCandidate) == 'null')){
+                            if(!(this.state.newCandidate === '')){
                                 this.props.addCandidate(this.state.newCandidate);
+                                this.setState({newCandidate:''});
                             }
                         }}
                     />
