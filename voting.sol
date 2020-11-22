@@ -6,7 +6,7 @@ contract Vote
     {
         address voterAddress;
         //mapping(uint32 => bytes32) votes;
-        string[] votes;//change from mapping to array
+        string[] votes;
         bool hasVoted;
         bytes32 info;
     }
