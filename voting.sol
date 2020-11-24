@@ -40,4 +40,8 @@ contract Vote
        
         
     }
+     function getCandidateList() public view returns(string[] memory) 
+    {
+        return candidateList;
+    }
 }
