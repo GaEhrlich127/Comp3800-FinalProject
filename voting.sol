@@ -48,19 +48,19 @@ contract Vote
                 {
                     
                 }
-                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[1]) == true)
+                else if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[1]) == true)
                 {
                     
                 }
-                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[2]) == true)
+                else if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[2]) == true)
                 {
                     
                 }
-                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[3]) == true)
+                else if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[3]) == true)
                 {
                     
                 }
-                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[4]) == true)
+                else if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[4]) == true)
                 {
                     
                 }
