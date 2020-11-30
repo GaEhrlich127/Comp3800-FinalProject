@@ -30,9 +30,43 @@ contract Vote
         }
         
     }
+
+     function compareStrings(string memory a, string memory b) public view returns (bool) //referenced from stack overflow
+     {
+
+    return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
+
+    }   
+
     function finalizeVote() public
     {
-        
+         for(uint i = 0; i < voterAddressArray.length; i++)//loop through every voter
+        {
+            for(uint j =0; j < 1;j++)
+            {
+                if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[0]) == true)
+                {
+                    
+                }
+                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[1]) == true)
+                {
+                    
+                }
+                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[2]) == true)
+                {
+                    
+                }
+                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[3]) == true)
+                {
+                    
+                }
+                 if(compareStrings(voterList[voterAddressArray[i]].votes[0],candidateList[4]) == true)
+                {
+                    
+                }
+                
+            }
+        }
     }
     function addCandidate(string memory candidateName) public
     {
