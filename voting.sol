@@ -5,11 +5,13 @@ contract Vote
     struct voter
     {
         address voterAddress;
-        mapping(uint32 => bytes32) votes;
+        //mapping(uint32 => bytes32) votes;
+        string[] votes;
+        bool hasVoted;
         bytes32 info;
     }
     string[] candidateList;
-    mapping(address => bool) voterList;
+    mapping(address => voter) voterList;
     address Manager;
     
     constructor(address _manager, string[] memory _candidateList) public
@@ -18,8 +20,14 @@ contract Vote
         candidateList = _candidateList;
     }
     
-    function vote() public
+    function vote(string[] memory votingPreference) public
     {
+       
+        uint i = 0;
+        for(i = 0; i < votingPreference.length;i++)
+        {
+            voterList[msg.sender].votes[i] = votingPreference[i];
+        }
         
     }
     function finalizeVote() public
@@ -29,5 +37,11 @@ contract Vote
     function addCandidate(string memory candidateName) public
     {
         candidateList.push(candidateName);
+       
+        
+    }
+     function getCandidateList() public view returns(string[] memory) 
+    {
+        return candidateList;
     }
 }
