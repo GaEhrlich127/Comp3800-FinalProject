@@ -9,7 +9,7 @@ contract Vote
         bool hasVoted;
         bytes32 info;
     }
-    mapping(string => uint)  tempCandidate;
+    mapping(string => int)  tempCandidate;
     address[] voterAddressArray;
     string[] candidateList;
     mapping(address => Voter) voterList;
@@ -47,25 +47,25 @@ contract Vote
         {
             tempCandidate[candidateList[i]] = 0;//initialize mapping
         }
-        for(int currentMaxPreference=0; currentMaxPreference<candidateList.length; currentMaxPreference++){
+        for(uint currentMaxPreference=0; currentMaxPreference<candidateList.length; currentMaxPreference++){
 
 	        //Iterate through each voter
-            for(int voterIndex=0; voterIndex<voterAddressArray.length;i++){
-		        Voter memory currentVoter = voterList[voterIndex];
-		        boolean voteCast=false;
+            for(uint voterIndex=0; voterIndex<voterAddressArray.length;voterIndex++){
+		        Voter memory currentVoter = voterList[voterAddressArray[voterIndex]];//voterAddressArray instead of voterList
+		        bool voteCast=false;
 
 		    //Iterate through the currentVoters vote Preference
-		        for(int voterPreference=0; voterPreference<currentVoter.votes.length; voterPreference++){
+		        for(uint voterPreference=0; voterPreference<currentVoter.votes.length; voterPreference++){
 		            if(voteCast==true){break;}
 		            
 		            if(voterPreference > currentMaxPreference){break;}
 		            
-			        if(tempCandidate[candidateList[i]]<0){
+			        if(tempCandidate[candidateList[voterPreference]]<0){
 				       
 				       continue;
 			        }
 			        else{
-				        tempCandidate[candidateList[i]]++;
+				        tempCandidate[candidateList[voterPreference]]++;
 				        voteCast=true;
 			        }
 			        
@@ -73,45 +73,51 @@ contract Vote
             }
 
             //Eliminate the lowest voted candidate
-	        string[] eliminatedCandidates;
+	        string[] memory eliminatedCandidates = new string[](candidateList.length);
 	        //Start by assuming that the minimum votes achieved were the maximum possible
-	        int lowVotes=voterList.length;
+	        int lowVotes = int (voterAddressArray.length);
 
 	        //Traverse through each candidates votes
-            for(int i=0;i<candidateList.length;i++){
-		            string currentCandidate=candidateList[i];
+            for(uint i=0;i<candidateList.length;i++){
+		            string memory currentCandidate=candidateList[i];
 		
 		            //If the current candidate matched the low vote, push them onto the eliminated group
 		            if(tempCandidate[currentCandidate]==lowVotes){
 		                
-			            eliminatedCandidates.push(currentCandidate);
+			            for(uint j = 0; j < eliminatedCandidates.length; j++ )
+			            {
+			                if(compareStrings(eliminatedCandidates[j] , "") == true)
+			                {
+			                    
+			                    eliminatedCandidates[j] = currentCandidate;
+			                }
+			            }
 		            }
 		            //If someone got lower, mark the new low vote, clear the eliminated group, and add them to the empty pile
 		            else if(tempCandidate[currentCandidate]  <lowVotes && tempCandidate[currentCandidate]>=0){
 		                
 			            lowVotes=tempCandidate[currentCandidate];
 			            
-			            for(int j=eliminatedCandidates.length-1;j>=0;j++){
+			            for(uint j=eliminatedCandidates.length-1;j>=0;j++){
 			                
-				            delete eliminatedCandidate[j]; 
-			            	eliminatedCandidate.length--;
+				           eliminatedCandidates[j] = "";
 			            }
-			            eliminatedCandidates.push(currentCandidate);
+			            eliminatedCandidates[0] = currentCandidate;
 		            }
                 }
 
 	    //After, mark all the eliminated Candidates as such
-	       for(int i=0;i<eliminatedCandidates.length;i++){
+	       for(uint i=0;i<eliminatedCandidates.length;i++){
 	           
-		        tempCandidate[eliminatedCandidates[i]]=-1;
+		        tempCandidate[eliminatedCandidates[i]] =  -1;
 	        }
-	        for(int i=0;i<candidateList.length;i++){
+	        for(uint i=0;i<candidateList.length;i++){
                 if(tempCandidate[candidateList[i]]>=0){
                     tempCandidate[candidateList[i]]=0;
                 }
             }
         }
-        for(int i=0;i<candidateList.length;i++){
+        for(uint i=0;i<candidateList.length;i++){
 	        if(tempCandidate[candidateList[i]]>0){
 		    //Do something here... This is the winner!
 	        }
