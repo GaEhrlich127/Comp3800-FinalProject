@@ -20,7 +20,7 @@ contract Vote
         Manager = _manager;
         candidateList = _candidateList;
     }
-    function register(address a,string[] memory vote, bool hasVoted,bytes32 information) public 
+    function register(string[] memory vote,bytes32 information) public 
     {
        Voter memory newVoter = Voter({voterAddress:msg.sender,votes:vote,hasVoted:false,info:information});
        voterList[msg.sender] = newVoter;
