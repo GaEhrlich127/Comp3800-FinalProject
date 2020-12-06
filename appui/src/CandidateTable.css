@@ -1,5 +1,7 @@
 table {
-    margin: 0 auto
+    margin: 0 auto;
+    border: 5px solid rgb(52,131,196);
+    border-radius: 10px;
 }
 
 td, th {
@@ -26,3 +28,6 @@ input:focus[type=number]{
 tr:nth-child(even) {background-color: #f2f2f2;}
 
 tr:hover {background-color: #ddd;}
+
+.fullTable{
+}

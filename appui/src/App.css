@@ -40,3 +40,21 @@
 .label{
   padding-right:5px;
 }
+
+.uploadDiv{
+  padding-top:20px;
+}
+
+.submitDiv{
+  padding-top:10px;
+}
+
+.submitButton{
+  height:35px;
+  width:160px;
+}
+.resultsButton{
+  margin-left:30px;
+  height:35px;
+  width:160px;
+}

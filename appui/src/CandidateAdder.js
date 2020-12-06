@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './CandidateAdder.css'
+import {Button} from 'reactstrap';
 
 export class CandidateAdder extends Component{
     constructor(props) {
@@ -19,16 +20,17 @@ export class CandidateAdder extends Component{
                     />
                 </td>
                 <td>
-                    <input
-                        type="button"
-                        value="Add Candidate"
+                    <Button
+                        color="primary"
                         onClick={()=>{
                             if(!(this.state.newCandidate === '')){
                                 this.props.addCandidate(this.state.newCandidate);
                                 this.setState({newCandidate:''});
                             }
                         }}
-                    />
+                    >
+                        Add Candidate
+                    </Button>
                 </td>
             </tr>
 		)

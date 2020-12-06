@@ -47,7 +47,7 @@ export class CandidateTable extends Component{
 			<div>
 				<h3>Candidates</h3>
 				<hr />
-				<table>
+				<table className="fullTable">
 					<tbody>
 						<tr>
 							<th>Candidate</th>
