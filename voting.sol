@@ -44,6 +44,15 @@ contract Vote
         voterList[msg.sender].hasVoted = true;
         
     }
+
+     function overwriteVote() public
+    {
+        voterList[msg.sender].hasVoted == false;
+        for(uint i = 0; i < voterList[msg.sender].votes.length; i++)
+        {
+            voterList[msg.sender].votes[i] = "0";
+        }
+    }
     
     function compareStrings(string memory a, string memory b) private view returns (bool) //referenced off stack overflow
     {
