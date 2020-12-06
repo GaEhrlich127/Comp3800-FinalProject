@@ -6,7 +6,6 @@ contract Vote
     {
         address voterAddress;
         string[] votes;
-        bool hasVoted;
         bytes32 info;
     }
     mapping(string => int)  tempCandidate;
@@ -31,7 +30,7 @@ contract Vote
     function vote(string[] memory votingPreference) public
     {
        
-        require(voterList[msg.sender].hasVoted == false);
+        
         require(msg.sender != Manager);
        
         for(uint i = 0; i < votingPreference.length; i++)
@@ -45,14 +44,7 @@ contract Vote
         
     }
 
-     function overwriteVote() public
-    {
-        voterList[msg.sender].hasVoted == false;
-        for(uint i = 0; i < voterList[msg.sender].votes.length; i++)
-        {
-            voterList[msg.sender].votes[i] = "";
-        }
-    }
+   
     
     function compareStrings(string memory a, string memory b) private view returns (bool) //referenced off stack overflow
     {
