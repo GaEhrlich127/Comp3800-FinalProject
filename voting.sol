@@ -50,7 +50,7 @@ contract Vote
         voterList[msg.sender].hasVoted == false;
         for(uint i = 0; i < voterList[msg.sender].votes.length; i++)
         {
-            voterList[msg.sender].votes[i] = "0";
+            voterList[msg.sender].votes[i] = "";
         }
     }
     
