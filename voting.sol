@@ -6,7 +6,7 @@ contract Vote
     {
         address voterAddress;
         string[] votes;
-        string info;
+        bytes32 info;
     }
     mapping(string => int)  tempCandidate;
     address[] voterAddressArray;
@@ -19,7 +19,7 @@ contract Vote
         Manager = _manager;
         candidateList = _candidateList;
     }
-    function register(string[] memory vote,string information) public 
+    function register(string[] memory vote,bytes32 information) public 
     {
        require(msg.sender != Manager);
        Voter memory newVoter = Voter({voterAddress:msg.sender,votes:vote,info:information});
