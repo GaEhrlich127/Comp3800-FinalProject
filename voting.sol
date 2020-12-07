@@ -21,30 +21,13 @@ contract Vote
     }
     function register(string[] memory vote,bytes32 information) public 
     {
-       Voter memory newVoter = Voter({voterAddress:msg.sender,votes:vote,hasVoted:false,info:information});
+       require(msg.sender != Manager);
+       Voter memory newVoter = Voter({voterAddress:msg.sender,votes:vote,info:information});
        voterList[msg.sender] = newVoter;
+       voterAddressArray.push(msg.sender);
        
         
     }
-    
-    function vote(string[] memory votingPreference) public
-    {
-       
-        
-        require(msg.sender != Manager);
-       
-        for(uint i = 0; i < votingPreference.length; i++)
-        {
-            voterList[msg.sender].votes[i] = votingPreference[i];
-        }
-        
-        
-        voterAddressArray.push(msg.sender);
-        voterList[msg.sender].hasVoted = true;
-        
-    }
-
-   
     
     function compareStrings(string memory a, string memory b) private view returns (bool) //referenced off stack overflow
     {
