@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './CandidateAdder.css'
-import {Button} from 'reactstrap';
 import { WinnerTable } from './WinnerTable';
 
 export class WinnerResults extends Component{
@@ -15,10 +14,10 @@ export class WinnerResults extends Component{
         this.state = {
             eliminatedCandidates:{},
             test:{
-                address1: ["Josh", "Max", "Jane"],
-                address2:["Jane","Janet","Max","Josh"],
-                address3:["Jane","Josh","Max","Janet"],
-                address4:["Janet","Jane","Max","Josh"],
+                address1: ["Ronald Reagan", "Ed Clark", "Barry Commoner"],
+                address2:["Barry Commoner","Jimmy Carter","Ed Clark","Ronald Reagan"],
+                address3:["Barry Commoner","Ronald Reagan","Ed Clark","Jimmy Carter"],
+                address4:["Jimmy Carter","Barry Commoner","Ed Clark","Ronald Reagan"],
             }
         }
     }
