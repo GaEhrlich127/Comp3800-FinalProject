@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './CandidateAdder.css'
 import {Button} from 'reactstrap';
+import { WinnerTable } from './WinnerTable';
 
 export class WinnerResults extends Component{
     constructor(props) {
@@ -40,7 +41,6 @@ export class WinnerResults extends Component{
                 }
             }
         });
-
         
         //Begin traversal over voters
         Object.entries(voterResults).forEach( ([address, preferences]) => {
@@ -85,24 +85,27 @@ export class WinnerResults extends Component{
                     pendingDeletion.push(candidate);
                 }
             });
-            console.log(`removing ${pendingDeletion}`)
             this.setState({eliminatedCandidates:Object.assign(this.state.eliminatedCandidates, {[waveNumber]:pendingDeletion})})
         }
-        console.log(this.state)
-        console.log(currentVotes)
+        return currentVotes;
     }
 	
 	render(){
+        let i=0;
+        while(Object.keys(this.calculateWave(this.state.test,i)).length>0){i++;}
+        let winnerTables=[];
+        i=0;
+        while(this.state.eliminatedCandidates[i].length>0){
+            winnerTables.push(<WinnerTable waveVotes={this.calculateWave(this.state.test,i)} currentWave={i} eliminatedCandidates={this.state.eliminatedCandidates[i]}/>);
+            i++;
+        }
+        console.log(winnerTables);
 		return(
             <div>
-                <Button onClick={()=>{this.calculateWave(this.state.test,0)}}>{`Wave 0`}</Button>
-                <Button onClick={()=>{this.calculateWave(this.state.test,1)}}>{`Wave 1`}</Button>
-                <Button onClick={()=>{this.calculateWave(this.state.test,2)}}>{`Wave 2`}</Button>
-                <Button onClick={()=>{this.calculateWave(this.state.test,3)}}>{`Wave 3`}</Button>
+                {winnerTables}
             </div>
 		)
 	} 
 }
 
 module.export = WinnerResults;
-
