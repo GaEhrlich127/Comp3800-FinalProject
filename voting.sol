@@ -21,7 +21,7 @@ contract Vote
     }
     function register(string[] memory vote,bytes32 information) public 
     {
-       require(msg.sender != Manager);
+       require(msg.sender != Manager,"Only a voter can vote!");
        Voter memory newVoter = Voter({voterAddress:msg.sender,votes:vote,info:information});
        voterList[msg.sender] = newVoter;
        voterAddressArray.push(msg.sender);
