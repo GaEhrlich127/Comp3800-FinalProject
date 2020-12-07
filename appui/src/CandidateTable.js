@@ -27,22 +27,25 @@ export class CandidateTable extends Component{
 					<td>
 							{candidate.name}
 					</td>
-					<input 
-						type="number"
-						min={0}
-						max={this.props.candidates.length}
-						placeholder={0}
-						onChange={
-							(event)=>{
-								this.handleChange(candidate, event.target.value)
+					<td>
+						<input 
+							type="number"
+							min={0}
+							max={this.props.candidates.length}
+							placeholder={0}
+							onChange={
+								(event)=>{
+									this.handleChange(candidate, event.target.value)
+								}
 							}
-						}
-						className={this.determineValidity(candidate.ranking, candidate.name, true)}
-						value={candidate.ranking}
-					/>
+							className={this.determineValidity(candidate.ranking, candidate.name, true)}
+							value={candidate.ranking}
+						/>
+					</td>
 				</tr>
 			)
 		})
+		
 		return(
 			<div>
 				<h3>Candidates</h3>
