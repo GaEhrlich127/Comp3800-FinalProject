@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './CandidateAdder.css'
 import { WinnerTable } from './WinnerTable';
+import { web3, NETWORK_TYPE, defaultAccount, voteContract } from "./config";
 
 export class WinnerResults extends Component{
     constructor(props) {
@@ -13,12 +14,6 @@ export class WinnerResults extends Component{
          */
         this.state = {
             eliminatedCandidates:{},
-            test:{
-                address1: ["Ronald Reagan", "Ed Clark", "Barry Commoner"],
-                address2:["Barry Commoner","Jimmy Carter","Ed Clark","Ronald Reagan"],
-                address3:["Barry Commoner","Ronald Reagan","Ed Clark","Jimmy Carter"],
-                address4:["Jimmy Carter","Barry Commoner","Ed Clark","Ronald Reagan"],
-            }
         }
     }
 
@@ -31,7 +26,7 @@ export class WinnerResults extends Component{
         //Setup
         let currentVotes={};
         Object.entries(this.props.candidates).forEach( ([index, candidateObject]) => {
-            currentVotes=Object.assign(currentVotes, {[candidateObject.name]:0});
+            Object.assign(currentVotes, {[candidateObject.name]:0});
         });
         Object.entries(this.state.eliminatedCandidates).forEach( ([waveEliminated, eliminations]) => {
             if(waveEliminated<waveNumber){
@@ -90,15 +85,15 @@ export class WinnerResults extends Component{
     }
 	
 	render(){
+                
         let i=0;
-        while(Object.keys(this.calculateWave(this.state.test,i)).length>0){i++;}
+        while(Object.keys(this.calculateWave(this.props.voteResults,i)).length>0){i++;}
         let winnerTables=[];
         i=0;
         while(this.state.eliminatedCandidates[i].length>0){
-            winnerTables.push(<WinnerTable waveVotes={this.calculateWave(this.state.test,i)} currentWave={i} eliminatedCandidates={this.state.eliminatedCandidates[i]}/>);
+            winnerTables.push(<WinnerTable waveVotes={this.calculateWave(this.props.voteResults,i)} currentWave={i} eliminatedCandidates={this.state.eliminatedCandidates[i]}/>);
             i++;
         }
-        console.log(winnerTables);
 		return(
             <div>
                 {winnerTables}

@@ -19,14 +19,38 @@ class App extends Component {
 			],
 			hash: "",
 			modal:false,
+			voteResults:{},
 		}
 		
 		this.refreshCandidateList();
+		this.refreshResults();
 
 		this.updateRanking = this.updateRanking.bind(this);
 		this.addCandidate = this.addCandidate.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 	}
+	async refreshResults(){
+        let output=voteContract.methods.getAllVoterAddresses().call().then( (allVotersWithDuplicates) => {
+            let voterList=[...new Set(allVotersWithDuplicates)];
+            let tempVoterList={};
+            for(let i=0;i<voterList.length;i++){
+                voteContract.methods.getVoterInformation(voterList[i]).call().then((currentVotersVotes)=>{
+                    Object.assign(tempVoterList, {[voterList[i]]:currentVotersVotes})
+                });
+            }
+            return tempVoterList;
+		});
+		output.then((result)=>{this.setState({voteResults:result});})
+		console.log(this.state.voteResults);
+    }
+
+    async prepareState(){
+        this.setState({voteResults:await this.refreshResults()});
+    }
+
+    async componentDidMount(){
+        await this.prepareState();
+    }
 
 	refreshCandidateList(){
 		voteContract.methods.getCandidateList().call().then( (candidates) => { 
@@ -44,7 +68,7 @@ class App extends Component {
 					temp.push({name:candidates[i], ranking:0});
 				}
 			}
-			this.setState(temp);
+			this.setState({candidates:temp});
 		});
 	}
 
@@ -53,6 +77,7 @@ class App extends Component {
 		this.setState({candidates:this.state.candidates.map(
 			(el)=>el.name===candidate.name ? Object.assign({},el,{ranking: Number(newRanking)}) : el
 		)});
+		this.refreshResults();
 	}
 	
 	//Add a new Candidate to the table
@@ -75,9 +100,11 @@ class App extends Component {
 				candidates:tempCandidates
 			});
 			
-			voteContract.methods.addCandidate(newCandidate).call().then((result)=>{console.log(result)});
+			voteContract.methods.addCandidate(newCandidate).send({from:defaultAccount.address,gas:1000000}).then( (result)=>{
+				console.log(result);
+			});
 		}
-
+		this.refreshResults();
 	}
 
 	toggleModal(){this.setState({modal:!this.state.modal});}
@@ -115,9 +142,15 @@ class App extends Component {
 					</Button>
 
 					<Button className="resultsButton" color="warning" onClick={this.toggleModal}>See Current Results</Button>
+					{/* <Button className="resultsButton" color="warning" onClick={()=>{
+						console.log(voteContract);
+						voteContract.methods.getCandidateList().call().then( (result) => {console.log(result);});
+						voteContract.methods.getAllVoterAddresses().call().then( (result) => {console.log(result);});
+						voteContract.methods.getVoterInformation(defaultAccount.address).call().then((result2)=>{console.log(result2)});
+					}}>Debug</Button> */}
 					
 					<Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-						<ModalBody><WinnerResults candidates={this.state.candidates}/></ModalBody>
+						<ModalBody><WinnerResults candidates={this.state.candidates} voteResults={this.state.voteResults}/></ModalBody>
 					</Modal>
 				</div>
 			</div>
@@ -145,7 +178,6 @@ class App extends Component {
 				for(let i=0;i<this.state.candidates.length;i++){
 					votes[this.state.candidates[i].ranking]=this.state.candidates[i].name;
 				}
-				console.log(votes);
 				votes.shift();
 				for(let i=0;i<votes.length;i++){
 					if(typeof votes[i]==="undefined"){
@@ -153,9 +185,11 @@ class App extends Component {
 					}
 				}
 				console.log(votes);
-
-				
-				voteContract.methods.register(votes, this.state.hash).call().then((error)=>{console.log(error)});
+				voteContract.methods.register(votes, this.state.hash).send({from:defaultAccount.address,gas:1000000}).then( (result)=>{
+					alert("Your vote has been submitted!");
+					console.log(result);
+					this.refreshResults();
+				});
 			}
 		}
 		else{alert("Please upload your Unique Identifying Document")}
