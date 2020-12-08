@@ -1,0 +1,69 @@
+//Setup the candidates vote mapping
+mapping(string=>int) tempCandidate;
+for(int i=0;i<candidateList.length;i++){
+	tempCandidate[candidateList[i]]=0;
+}
+
+//This first loop is the god loop - It's going to run N times, to determine the winning candidate
+//Each time this loop resets, is another pass of votes, with fewer candidates each time
+for(int currentMaxPreference=0; currentMaxPreference<candidateList.length; currentMaxPreference++){
+
+	//Iterate through each voter
+    for(int voterIndex=0; voterIndex<voterAddressArray.length;voterIndex++){
+		Voter currentVoter = voterList[voterIndex];
+		boolean voteCast=false;
+
+		//Iterate through the currentVoters vote Preference
+		for(int voterPreference=0; voterPreference<currentVoter.votes.length; voterPreference++){
+			if(voteCast==true){break;}
+			if(voterPreference>currentMaxPreference){break;}
+
+			if(tempCandidate[candidateList[i]]<0){
+				continue;
+			}
+			else{
+				tempCandidate[candidateList[i]]++;
+				voteCast=true;
+			}
+		}
+    }
+
+    //Eliminate the lowest voted candidate
+	string[] eliminatedCandidates;
+	//Start by assuming that the minimum votes achieved were the maximum possible
+	int lowVotes=voterList.length;
+
+	//Traverse through each candidates votes
+    for(int i=0;i<candidateList.length;i++){
+		string currentCandidate=candidateList[i];
+		
+		//If the current candidate matched the low vote, push them onto the eliminated group
+		if(tempCandidate[currentCandidate]==lowVotes){
+			eliminatedCandidates.push(currentCandidate);
+		}
+		//If someone got lower, mark the new low vote, clear the eliminated group, and add them to the empty pile
+		else if(tempCandidate[currentCandidate]<lowVotes && tempCandidate[currentCandidate]>=0){
+			lowVotes=tempCandidate[currentCandidate];
+			for(int j=eliminatedCandidates.length-1;j>=0;j++){
+				delete eliminatedCandidate[j]; //NOTE this is actually how to do this in solidity. (delete this comment later)
+				eliminatedCandidate.length--;
+			}
+			eliminatedCandidates.push(currentCandidate);
+		}
+    }
+
+	//After, mark all the eliminated Candidates as such
+	for(int i=0;i<eliminatedCandidates.length;i++){
+		tempCandidate[eliminatedCandidates[i]]=-1;
+	}
+	for(int i=0;i<candidateList.length;i++){
+		if(tempCandidate[candidateList[i]]>=0){
+			tempCandidate[candidateList[i]]=0;
+		}
+	}
+}
+for(int i=0;i<candidateList.length;i++){
+	if(tempCandidate[candidateList[i]]>0){
+		//Do something here... This is the winner!
+	}
+}
