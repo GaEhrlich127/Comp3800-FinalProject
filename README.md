@@ -9,19 +9,20 @@ Voting is a crucial part of many democratic systems, but traditional First Past 
 ## Features
 1. Candidate Ranking and Voting
 2. Adding New Candidates
-    * Included to mimic the ability to Write-In Candidates as you can in the USA's elections.
+    * Included to mimic the ability to Write-In Candidates as you can in the USA's elections
 3. Unique Identifier Uploading
-    * Intended to be representative of a fingerprint, this allows in person investigations of potential fraud.
+    * Intended to be representative of a fingerprint, this allows in person investigations of potential fraud
 4. Live Results
-    * Anyone can see the results of the election at that exact moment, until official results are processed.
+    * Anyone can see the results of the election at that exact moment, until official results are processed
 
 ## Getting Started
 ### Installation and Setup
 1. Install [Node.js](https://nodejs.org/)
-2. Clones this repository and install its dependencies.
+2. Clones this repository and install its dependencies
 
 		> git clone https://github.com/GaEhrlich127/Comp3800-FinalProject Ranked-Choice
 		> cd Ranked-Choice
+        > cd appui
 		> npm install
 
 3. Begin running the Web App
@@ -36,16 +37,8 @@ Voting is a crucial part of many democratic systems, but traditional First Past 
 
 ## Demo video
 
-Upload your demo video to youtube and put a link here. Basically, the video content is very much like the quick live demo of your product with the followings:
-1. Introduction
-2. How to run the app
-3. Quick walkthrough of all the features of your app one by one
+[A Demo of this software can be found here](https://youtu.be/iRGckt0cCNg)
 
-Please make it short and interesting!
-
-Sample: https://www.youtube.com/watch?v=Pr-JMqTkdEM
-
-How to record your screen: https://www.techradar.com/how-to/record-your-screen
 
 ## Contributors
 
