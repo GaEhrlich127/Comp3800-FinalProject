@@ -4,8 +4,8 @@ const ENDPOINT = NETWORK_TYPE === 'private' ? "http://localhost:8545" : "https:/
 const web3 = new Web3(new Web3.providers.HttpProvider(ENDPOINT))
 
 let defaultAccount = {
-    address: '', // Replace with your Metamask wallet account address - or ganache address
-    privateKey: '' // Replace with private key of your Metamask wallet account address, prefixed with 0x
+    address: '0xdE832dD0b069E0B781898A966A1c487dC781489a', // Replace with your Metamask wallet account address - or ganache address
+    privateKey: '0x203bf16c865983ec12c48d6b35ab36aae4a090f34b3debd6856e5340e3c0249e' // Replace with private key of your Metamask wallet account address, prefixed with 0x
 }
 
 // Replace with vote ABI obtained by truffle console. Only the part between [] (inclusive)

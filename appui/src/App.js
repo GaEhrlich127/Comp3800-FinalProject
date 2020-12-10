@@ -104,7 +104,7 @@ class App extends Component {
 				const txObject = {
 				  nonce: web3.utils.toHex(txCount),
 				  gasLimit: web3.utils.toHex(7680000), 
-				  gasPrice: web3.utils.toHex(web3.utils.toWei('4500000000', 'wei')),
+				  gasPrice: web3.utils.toHex(web3.utils.toWei('5500000000', 'wei')),
 				  to: voteContract._address,
 				  data: voteContract.methods.addCandidate(newCandidate).encodeABI()
 				}
@@ -209,7 +209,7 @@ class App extends Component {
 					const txObject = {
 					  nonce: web3.utils.toHex(txCount),
 					  gasLimit: web3.utils.toHex(7680000), 
-					  gasPrice: web3.utils.toHex(web3.utils.toWei('4500000000', 'wei')),
+					  gasPrice: web3.utils.toHex(web3.utils.toWei('5500000000', 'wei')),
 					  to: voteContract._address,
 					  data: voteContract.methods.register(votes,this.state.hash).encodeABI()
 					}
