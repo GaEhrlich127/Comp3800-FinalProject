@@ -19,11 +19,15 @@ Voting is a crucial part of many democratic systems, but traditional First Past 
 ### Installation and Setup
 1. Install [Node.js](https://nodejs.org/)
 2. Clones this repository and install its dependencies.
+
 		> git clone https://github.com/GaEhrlich127/Comp3800-FinalProject
 		> cd node-login
 		> npm install
+
 3. Begin running the Web App
+
         > npm start
+        
 ### Run
 # To Run on the Ropsten Test Contract
 1. Navigate to `appui/src/config.js`
