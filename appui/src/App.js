@@ -77,7 +77,7 @@ class App extends Component {
 		this.setState({candidates:this.state.candidates.map(
 			(el)=>el.name===candidate.name ? Object.assign({},el,{ranking: Number(newRanking)}) : el
 		)});
-		this.refreshResults();
+		// this.refreshResults();
 	}
 	
 	//Add a new Candidate to the table
@@ -99,10 +99,30 @@ class App extends Component {
 			this.setState({
 				candidates:tempCandidates
 			});
-			
-			voteContract.methods.addCandidate(newCandidate).send({from:defaultAccount.address,gas:1000000}).then( (result)=>{
-				console.log(result);
-			});
+
+			web3.eth.getTransactionCount(defaultAccount.address, (err, txCount) => {
+				const txObject = {
+				  nonce: web3.utils.toHex(txCount),
+				  gasLimit: web3.utils.toHex(7680000), 
+				  gasPrice: web3.utils.toHex(web3.utils.toWei('4500000000', 'wei')),
+				  to: voteContract._address,
+				  data: voteContract.methods.addCandidate(newCandidate).encodeABI()
+				}
+		  
+				const tx = NETWORK_TYPE === 'private' ? new Tx(txObject) : new Tx(txObject, { 'chain': 'ropsten' });
+				tx.sign(Buffer.from(defaultAccount.privateKey.substr(2), 'hex'))
+		  
+				const serializedTx = tx.serialize()
+				const raw = '0x' + serializedTx.toString('hex')
+		  
+				web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+					console.log('err:', err, 'txHash:', txHash)
+					if (!err) {
+						alert("Candidate added!");
+						this.refreshResults();
+					  }
+				})
+			})
 		}
 		this.refreshResults();
 	}
@@ -185,11 +205,29 @@ class App extends Component {
 					}
 				}
 				console.log(votes);
-				voteContract.methods.register(votes, this.state.hash).send({from:defaultAccount.address,gas:1000000}).then( (result)=>{
-					alert("Your vote has been submitted!");
-					console.log(result);
-					this.refreshResults();
-				});
+				web3.eth.getTransactionCount(defaultAccount.address, (err, txCount) => {
+					const txObject = {
+					  nonce: web3.utils.toHex(txCount),
+					  gasLimit: web3.utils.toHex(7680000), 
+					  gasPrice: web3.utils.toHex(web3.utils.toWei('4500000000', 'wei')),
+					  to: voteContract._address,
+					  data: voteContract.methods.register(votes,this.state.hash).encodeABI()
+					}
+			  
+					const tx = NETWORK_TYPE === 'private' ? new Tx(txObject) : new Tx(txObject, { 'chain': 'ropsten' });
+					tx.sign(Buffer.from(defaultAccount.privateKey.substr(2), 'hex'))
+			  
+					const serializedTx = tx.serialize()
+					const raw = '0x' + serializedTx.toString('hex')
+			  
+					web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+						console.log('err:', err, 'txHash:', txHash)
+						if (!err) {
+							alert("Your vote has been submitted!");
+							this.refreshResults();
+					  	}
+					})
+				})
 			}
 		}
 		else{alert("Please upload your Unique Identifying Document")}
