@@ -20,19 +20,19 @@ Voting is a crucial part of many democratic systems, but traditional First Past 
 1. Install [Node.js](https://nodejs.org/)
 2. Clones this repository and install its dependencies.
 
-		> git clone https://github.com/GaEhrlich127/Comp3800-FinalProject
-		> cd node-login
+		> git clone https://github.com/GaEhrlich127/Comp3800-FinalProject Ranked-Choice
+		> cd Ranked-Choice
 		> npm install
 
 3. Begin running the Web App
 
         > npm start
-        
+
 ### Run
 # To Run on the Ropsten Test Contract
 1. Navigate to `appui/src/config.js`
 2. On Line 7, replace `''` with your Metamask Public Key (leave the quotations)
-3. On Line 8, replace `''` with your Metamask private key - preceded with 0x (leave the quotations)
+3. On Line 8, replace `''` with your Metamask Private key - preceded by 0x (leave the quotations)
 
 ## Demo video
 
