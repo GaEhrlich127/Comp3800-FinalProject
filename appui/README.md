@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+![Build and Test](https://github.com/drphamwit/SE-SampleGithubRepo/workflows/Build%20and%20Test/badge.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ranked Choice Voting with React and Solidity
 
-## Available Scripts
+This is a sample README file. It is required to have all sections below at the minimum but feel free to add more if you want. Also, it is recommended to follow the same formats with headers, bullet points, highlights...
 
-In the project directory, you can run:
+Here is a README.md example: https://github.com/drphamwit/SE-SampleGithubRepo/blob/master/README-Example.md
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Voting is a crucial part of many democratic systems, but traditional First Past the Post leaves many people unsatisfied. Ranked Choice Voting allows voters to rank candidates in their order of preference, and have their votes applied correspondingly.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features
+1. Candidate Ranking and Voting
+2. Adding New Candidates
+    * Included to mimic the ability to Write-In Candidates as you can in the USA's elections.
+3. Unique Identifier Uploading
+    * Intended to be representative of a fingerprint, this allows in person investigations of potential fraud.
+4. Live Results
+    * Anyone can see the results of the election at that exact moment, until official results are processed.
 
-### `npm test`
+## Getting Started
+### Installation and Setup
+Install Node.js
+Install truffle (optional)
+Install ganache-cli (optional)
+### Run
+# To Run on the Ropsten Test Contract
+1. Navigate to `appui/src/config.js`
+2. On Line 7, replace `''` with your Metamask Public Key (leave the quotations)
+3. On Line 8, replace `''` with your Metamask private key - preceded with 0x (leave the quotations)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Demo video
 
-### `npm run build`
+Upload your demo video to youtube and put a link here. Basically, the video content is very much like the quick live demo of your product with the followings:
+1. Introduction
+2. How to run the app
+3. Quick walkthrough of all the features of your app one by one
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Please make it short and interesting!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sample: https://www.youtube.com/watch?v=Pr-JMqTkdEM
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+How to record your screen: https://www.techradar.com/how-to/record-your-screen
 
-### `npm run eject`
+## Contributors
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Gabe Ehrlich, Front End
+* Rodney Chan, Back End
